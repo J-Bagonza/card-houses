@@ -29,7 +29,7 @@ const Navbar = () => {
           {dropdown === item && (
             <div className="absolute top-full mt-2 bg-white shadow-md rounded-md p-4 w-64">
               {item === "Where" && <DropdownMenu />}
-              {item === "Check-in" && <DatePicker />}
+              {item === "Check-n" && <DatePicker />}
               {item === "Check-out" && <DatePicker />}
               {/* "Who" dropdown will be added later */}
             </div>
