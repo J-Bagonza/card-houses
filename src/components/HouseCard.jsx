@@ -7,7 +7,7 @@ const HouseCard = ({ image, location, distance, price, rating }) => {
     <div className="relative w-full">
       <div className="relative">
         {/* Image */}
-        <img src={image} alt="Houe" className="w-full h-64 object-cover rounded-lg" />
+        <img src={image} alt="House" className="w-full h-64 object-cover rounded-lg" />
         
         {/* Love Icon */}
         <FaHeart className="absolute top-2 right-2 text-white text-xl" />

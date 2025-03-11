@@ -2,9 +2,9 @@ import { FaLocationArrow } from "react-icons/fa";
 import kingsGate from "../assets/images/kings.png"; // Example image
 
 const locations = [
-  { name: "Kings Gate", description: "Affordable housing", image: kingsGate },
-  { name: "Downtown View", description: "Luxury apartments", image: kingsGate },
-  { name: "Seaside Villas", description: "Beachfront escapes", image: kingsGate },
+  { name: "Kings", description: "Affordable housing", image: kingsGate },
+  { name: "Egerton Apartments", description: "Luxury apartments", image: kingsGate },
+  { name: "Right", description: "Near gate", image: kingsGate },
 ];
 
 const DropdownMenu = () => {
@@ -15,7 +15,7 @@ const DropdownMenu = () => {
         <FaLocationArrow className="text-gray-600" />
         <div>
           <p className="font-bold">Nearby</p>
-          <p className="text-sm text-gray-500">Find what's around you</p>
+          <p className="text-sm text-gray-500">Find what's near you</p>
         </div>
       </div>
 
