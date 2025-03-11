@@ -8,7 +8,7 @@ const Home = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const houses = [
-    { image: "src/assets/images/house1.jpg", location: "Kings Gate", distance: "500m from campus", price: "Ksh 10,000/month", rating: 4.8 },
+    { image: "src/assets/images/house1.jpg", location: "", distance: "500m from campus", price: "Ksh 10,000/month", rating: 4.8 },
     { image: "src/assets/images/house2.jpg", location: "West Haven", distance: "700m from campus", price: "Ksh 8,500/month", rating: 4.6 },
     { image: "src/assets/images/house3.jpg", location: "Campus Heights", distance: "200m from campus", price: "Ksh 12,000/month", rating: 4.9 },
     { image: "src/assets/images/house4.jpg", location: "Student Plaza", distance: "300m from campus", price: "Ksh 9,500/month", rating: 4.7 },
