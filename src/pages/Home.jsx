@@ -1,18 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaFilter } from "react-icons/fa";
 import IconsSection from "../components/IconsSection";
 import FiltersModal from "../components/FiltersModal";
 import HouseCard from "../components/HouseCard";
 
+const API_URL = "https://cardlabs.pythonanywhere.com/api/v1/rooms";
+
 const Home = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [houses, setHouses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const houses = [
-    { image: "src/assets/images/house1.jpg", location: "Kings", distance: "500m from campus", price: "Ksh 10,000/month", rating: 4.8 },
-    { image: "src/assets/images/house2.jpg", location: "West Haven", distance: "700m from campus", price: "Ksh 8,500/month", rating: 4.6 },
-    { image: "src/assets/images/house3.jpg", location: "Campus Heights", distance: "200m from campus", price: "Ksh 12,000/month", rating: 4.9 },
-    { image: "src/assets/images/house4.jpg", location: "Student Plaza", distance: "300m from campus", price: "Ksh 9,500/month", rating: 4.7 },
-  ];
+  // Fetch houses from API
+  useEffect(() => {
+    const fetchHouses = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error("Failed to fetch houses");
+        
+        const data = await response.json();
+        setHouses(data); // Assuming API returns an array of house objects
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHouses();
+  }, []);
 
   return (
     <div className="px-6">
@@ -31,12 +48,25 @@ const Home = () => {
       {/* Filters Modal */}
       <FiltersModal isOpen={isFilterOpen} onClose={() => setIsFilterOpen(false)} />
 
+      {/* Loading and Error Handling */}
+      {loading && <p className="text-center mt-6">Loading houses...</p>}
+      {error && <p className="text-center mt-6 text-red-500">{error}</p>}
+
       {/* House Listings */}
-      <div className="grid grid-cols-4 gap-6 mt-6">
-        {houses.map((house, index) => (
-          <HouseCard key={index} {...house} />
-        ))}
-      </div>
+      {!loading && !error && (
+        <div className="grid grid-cols-4 gap-6 mt-6">
+          {houses.map((house) => (
+            <HouseCard 
+              key={house.id} 
+              image={house.image_url} 
+              location={house.location} 
+              distance={house.distance} 
+              price={`Ksh ${house.price}/month`} 
+              rating={house.rating} 
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
