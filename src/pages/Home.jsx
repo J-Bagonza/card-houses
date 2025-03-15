@@ -4,7 +4,8 @@ import IconsSection from "../components/IconsSection";
 import FiltersModal from "../components/FiltersModal";
 import HouseCard from "../components/HouseCard";
 
-const API_URL = "https://cardlabs.pythonanywhere.com/api/v1/rooms";
+const HOUSES_API_URL = "https://cardlabs.pythonanywhere.com/api/v1/home/feed";
+const DEFAULT_IMAGE_URL = "https://cardlabs.pythonanywhere.com/static/default_house.png"; 
 
 const Home = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -16,13 +17,19 @@ const Home = () => {
   useEffect(() => {
     const fetchHouses = async () => {
       try {
-        const response = await fetch(API_URL);
+        const response = await fetch(HOUSES_API_URL);
         if (!response.ok) throw new Error("Failed to fetch houses");
-        
+
         const data = await response.json();
-        setHouses(data); // Assuming API returns an array of house objects
+        if (Array.isArray(data.plots)) {
+          setHouses(data.plots);
+        } else {
+          console.error("Unexpected API response:", data);
+          setHouses([]);
+        }
       } catch (err) {
         setError(err.message);
+        setHouses([]);
       } finally {
         setLoading(false);
       }
@@ -55,16 +62,37 @@ const Home = () => {
       {/* House Listings */}
       {!loading && !error && (
         <div className="grid grid-cols-4 gap-6 mt-6">
-          {houses.map((house) => (
-            <HouseCard 
-              key={house.id} 
-              image={house.image_url} 
-              location={house.location} 
-              distance={house.distance} 
-              price={`Ksh ${house.price}/month`} 
-              rating={house.rating} 
-            />
-          ))}
+          {houses.map((house, index) => {
+            // ✅ Prioritized images for the first row
+            const prioritizedImages = [
+              "https://cardlabs.pythonanywhere.com/static/2/1.png",
+              "https://cardlabs.pythonanywhere.com/static/2/6.png",
+              "https://cardlabs.pythonanywhere.com/static/2/7.png",
+              "https://cardlabs.pythonanywhere.com/static/2/8.png",
+            ];
+
+            let imageUrl = DEFAULT_IMAGE_URL;
+
+            if (index < 4) {
+              imageUrl = prioritizedImages[index] || DEFAULT_IMAGE_URL;
+            } else {
+              // ✅ Find cover image first, then fallback to the first room image
+              const coverPhoto = house.cover_photos.find(photo => photo.type === "cover");
+              const roomPhoto = house.cover_photos.find(photo => photo.type === "room");
+              imageUrl = coverPhoto?.URL || roomPhoto?.URL || DEFAULT_IMAGE_URL;
+            }
+
+            return (
+              <HouseCard 
+                key={house.id} 
+                image={imageUrl} 
+                location={house.location} 
+                name={house.name} 
+                price={`Ksh ${house.general_monthly_rent}/month`} 
+                deposit={`Deposit: Ksh ${house.general_deposit}`} 
+              />
+            );
+          })}
         </div>
       )}
     </div>
