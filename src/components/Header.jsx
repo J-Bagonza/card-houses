@@ -1,20 +1,19 @@
 import { useState, useContext } from "react";
-import { FaUserCircle, FaBars } from "react-icons/fa";
+import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ setIsLoginOpen, setIsSignupOpen }) => {
   const { user, logout } = useContext(AuthContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate("/login");
+    setIsLoginOpen(true);
     setIsDropdownOpen(false);
   };
 
   const handleSignup = () => {
-    navigate("/signup");
+    setIsSignupOpen(true);
     setIsDropdownOpen(false);
   };
 
@@ -36,32 +35,48 @@ const Header = () => {
           <FaBars size={20} />
         </button>
 
-        {/* User Icon with Hover Dropdown */}
-        <div
-          className="relative"
-          onMouseEnter={() => setIsDropdownOpen(true)}
-          onMouseLeave={() => setIsDropdownOpen(false)}
-        >
-          <button className={`${user ? "text-green-500" : "text-gray-600"} hover:text-black`}>
-            <FaUserCircle size={24} />
+        {/* User Icon & Clickable Dropdown */}
+        <div className="relative">
+          <button
+            className={`${user ? "text-green-500" : "text-gray-600"} hover:text-black`}
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          >
+            <FaUserCircle size={30} />
             {user && <span className="text-xs block text-center">{user.firstName}</span>}
           </button>
 
-          {/* Dropdown Menu */}
+          {/* Dropdown Menu - Stays Open Until Closed */}
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md py-2 z-50 transition-opacity duration-200 ease-in-out opacity-100">
+            <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-md py-4 z-50">
+              {/* Close Button */}
+              <div className="flex justify-end pr-4">
+                <button onClick={() => setIsDropdownOpen(false)} className="text-gray-600 hover:text-black">
+                  <FaTimes size={16} />
+                </button>
+              </div>
+
               {!user ? (
                 <>
-                  <button onClick={handleLogin} className="block w-full px-4 py-2 text-left hover:bg-gray-100">
+                  <button
+                    onClick={handleLogin}
+                    className="block w-full px-6 py-3 text-left text-lg hover:bg-gray-100"
+                  >
                     Login
                   </button>
-                  <button onClick={handleSignup} className="block w-full px-4 py-2 text-left hover:bg-gray-100">
+                  <hr className="border-t-2 border-red-500 mx-4" />
+                  <button
+                    onClick={handleSignup}
+                    className="block w-full px-6 py-3 text-left text-lg hover:bg-gray-100"
+                  >
                     Signup
                   </button>
                 </>
               ) : (
                 <>
-                  <button onClick={logout} className="block w-full px-4 py-2 text-left hover:bg-gray-100">
+                  <button
+                    onClick={logout}
+                    className="block w-full px-6 py-3 text-left text-lg hover:bg-gray-100"
+                  >
                     Logout
                   </button>
                 </>
