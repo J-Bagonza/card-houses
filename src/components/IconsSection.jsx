@@ -1,4 +1,3 @@
-// src/components/IconsSection.jsx
 import React from "react";
 import { FaBolt, FaWifi, FaShoppingCart, FaGamepad, FaGlassCheers, FaUniversity, FaTree, FaTint } from "react-icons/fa";
 
@@ -15,11 +14,11 @@ const features = [
 
 const IconsSection = () => {
   return (
-    <div className="flex gap-6 items-center overflow-x-auto py-4 px-2">
+    <div className="flex gap-8 items-center overflow-x-auto py-4 px-2">
       {features.map((feature, index) => (
-        <div key={index} className="flex flex-col items-center text-gray-700 text-sm">
-          <div className="text-2xl">{feature.icon}</div>
-          <span>{feature.text}</span>
+        <div key={index} className="flex flex-col items-center text-gray-900 text-sm">
+          <div className="text-2xl text-red-500">{feature.icon}</div> {/* Icon in Red */}
+          <span className="text-green-600">{feature.text}</span> {/* Text in Black */}
         </div>
       ))}
     </div>
