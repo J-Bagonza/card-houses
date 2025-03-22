@@ -1,4 +1,4 @@
-// src/components/HouseCard.jsx
+
 import React from "react";
 import { FaHeart, FaStar } from "react-icons/fa";
 
