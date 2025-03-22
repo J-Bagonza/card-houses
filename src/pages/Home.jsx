@@ -63,7 +63,7 @@ const Home = () => {
       {!loading && !error && (
         <div className="grid grid-cols-4 gap-6 mt-6">
           {houses.map((house, index) => {
-            // ✅ Prioritized images for the first row
+            //Prioritized images for the first row
             const prioritizedImages = [
               "https://cardlabs.pythonanywhere.com/static/2/1.png",
               "https://cardlabs.pythonanywhere.com/static/2/6.png",
