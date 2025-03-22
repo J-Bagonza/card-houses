@@ -87,7 +87,7 @@ const Home = () => {
           location={house.location} 
           name={house.name} 
           price={`Ksh ${house.general_monthly_rent}/month`} 
-          deposit={`Deposit: Ksh ${house.general_deposit}} 
+          deposit={`Deposit: Ksh ${house.general_deposit}`} 
         />
       );
     })}
