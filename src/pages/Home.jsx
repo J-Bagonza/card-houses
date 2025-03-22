@@ -74,7 +74,7 @@ const Home = () => {
                 image={imageUrl} 
                 location={house.location} 
                 name={house.name} 
-                price={`Ksh ${house.general_monthly_rent}/month} 
+                price={`Ksh ${house.general_monthly_rent}/month`} 
                 deposit={Deposit: Ksh ${house.general_deposit}} 
               />
             );
