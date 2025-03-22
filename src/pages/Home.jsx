@@ -76,7 +76,7 @@ const Home = () => {
             if (index < 4) {
               imageUrl = prioritizedImages[index] || DEFAULT_IMAGE_URL;
             } else {
-              // ✅ Find cover image first, then fallback to the first room image
+              //  Find cover image first, then fallback to the first room image
               const coverPhoto = house.cover_photos.find(photo => photo.type === "cover");
               const roomPhoto = house.cover_photos.find(photo => photo.type === "room");
               imageUrl = coverPhoto?.URL || roomPhoto?.URL || DEFAULT_IMAGE_URL;
