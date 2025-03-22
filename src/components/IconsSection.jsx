@@ -14,11 +14,11 @@ const features = [
 
 const IconsSection = () => {
   return (
-    <div className="flex gap-4 md:gap-8 items-center overflow-x-auto py-2 md:py-4 px-2">
+    <div className="flex w-full gap-2 md:gap-8 items-center overflow-x-auto py-2 md:py-4 px-2">
       {features.map((feature, index) => (
-        <div key={index} className="flex flex-col items-center text-gray-900 text-sm">
-          <div className="text-2xl text-red-500">{feature.icon}</div> {/* Icon in Red */}
-          <span className="text-green-600">{feature.text}</span> {/* Text in Black */}
+        <div key={index} className="flex flex-col items-center text-gray-900 text-xs md:text-sm">
+          <div className="text-xl md:text-2xl text-red-500">{feature.icon}</div>
+          <span className="text-green-600">{feature.text}</span>
         </div>
       ))}
     </div>
