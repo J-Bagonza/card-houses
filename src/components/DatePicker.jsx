@@ -3,13 +3,12 @@ import { useState, useEffect } from "react";
 const DatePicker = ({ type, selectedDate, setSelectedDate }) => {
   const [availableDates, setAvailableDates] = useState([]);
 
-  // Fetch available dates for room availability
   useEffect(() => {
     const fetchAvailableDates = async () => {
       try {
         const response = await fetch("https://cardlabs.pythonanywhere.com/api/v1/available-dates");
         const data = await response.json();
-        setAvailableDates(data); // Assuming API returns an array of dates
+        setAvailableDates(data);
       } catch (error) {
         console.error("Error fetching available dates:", error);
       }
@@ -18,7 +17,6 @@ const DatePicker = ({ type, selectedDate, setSelectedDate }) => {
     fetchAvailableDates();
   }, []);
 
-  // Handle date change
   const handleDateChange = async (event) => {
     const newDate = event.target.value;
     setSelectedDate((prev) => ({ ...prev, [type]: newDate }));
@@ -39,9 +37,8 @@ const DatePicker = ({ type, selectedDate, setSelectedDate }) => {
       type="date"
       value={selectedDate[type] || ""}
       onChange={handleDateChange}
-      className="border p-2 w-full rounded-md"
+      className="border p-3 w-full rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
       min={type === "checkOut" ? selectedDate.checkIn : ""}
-      list="available-dates"
     />
   );
 };
