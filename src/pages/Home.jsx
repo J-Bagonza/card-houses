@@ -61,7 +61,7 @@ const Home = () => {
 
       {/* House Listings */}
       {!loading && !error && (
-  <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
+  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
     {houses.map((house, index) => {
       const prioritizedImages = [
         "https://cardlabs.pythonanywhere.com/static/2/1.png",
@@ -86,8 +86,9 @@ const Home = () => {
           image={imageUrl} 
           location={house.location} 
           name={house.name} 
-          price={`Ksh ${house.general_monthly_rent}/month`} 
-          deposit={`Deposit: Ksh ${house.general_deposit}`} 
+          price={Ksh ${house.general_monthly_rent}/month} 
+          deposit={Deposit: Ksh ${house.general_deposit}} 
+          className="p-3 md:p-5 rounded-lg shadow-md w-full" 
         />
       );
     })}
