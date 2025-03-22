@@ -4,7 +4,7 @@ import { FaHeart, FaStar } from "react-icons/fa";
 
 const HouseCard = ({ image, location, distance, price, rating }) => {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full max-w-xs mx-auto">
       <div className="relative">
         {/* Image */}
         <img src={image} alt="House" className="w-full h-64 object-cover rounded-lg" />
