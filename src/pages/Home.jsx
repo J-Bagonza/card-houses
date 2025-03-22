@@ -60,41 +60,39 @@ const Home = () => {
       {error && <p className="text-center mt-6 text-red-500">{error}</p>}
 
       {/* House Listings */}
-      {!loading && !error && (
-        <div className="grid grid-cols-4 gap-6 mt-6">
-          {houses.map((house, index) => {
-            //Prioritized images for the first row
-            const prioritizedImages = [
-              "https://cardlabs.pythonanywhere.com/static/2/1.png",
-              "https://cardlabs.pythonanywhere.com/static/2/6.png",
-              "https://cardlabs.pythonanywhere.com/static/2/7.png",
-              "https://cardlabs.pythonanywhere.com/static/2/8.png",
-            ];
+{!loading && !error && (
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+    {houses.map((house, index) => {
+      const prioritizedImages = [
+        "https://cardlabs.pythonanywhere.com/static/2/1.png",
+        "https://cardlabs.pythonanywhere.com/static/2/6.png",
+        "https://cardlabs.pythonanywhere.com/static/2/7.png",
+        "https://cardlabs.pythonanywhere.com/static/2/8.png",
+      ];
 
-            let imageUrl = DEFAULT_IMAGE_URL;
+      let imageUrl = DEFAULT_IMAGE_URL;
 
-            if (index < 4) {
-              imageUrl = prioritizedImages[index] || DEFAULT_IMAGE_URL;
-            } else {
-              //  Find cover image first, then fallback to the first room image
-              const coverPhoto = house.cover_photos.find(photo => photo.type === "cover");
-              const roomPhoto = house.cover_photos.find(photo => photo.type === "room");
-              imageUrl = coverPhoto?.URL || roomPhoto?.URL || DEFAULT_IMAGE_URL;
-            }
+      if (index < 4) {
+        imageUrl = prioritizedImages[index] || DEFAULT_IMAGE_URL;
+      } else {
+        const coverPhoto = house.cover_photos.find(photo => photo.type === "cover");
+        const roomPhoto = house.cover_photos.find(photo => photo.type === "room");
+        imageUrl = coverPhoto?.URL || roomPhoto?.URL || DEFAULT_IMAGE_URL;
+      }
 
-            return (
-              <HouseCard 
-                key={house.id} 
-                image={imageUrl} 
-                location={house.location} 
-                name={house.name} 
-                price={`Ksh ${house.general_monthly_rent}/month`} 
-                deposit={`Deposit: Ksh ${house.general_deposit}`} 
-              />
-            );
-          })}
-        </div>
-      )}
+      return (
+        <HouseCard 
+          key={house.id} 
+          image={imageUrl} 
+          location={house.location} 
+          name={house.name} 
+          price={Ksh ${house.general_monthly_rent}/month} 
+          deposit={Deposit: Ksh ${house.general_deposit}} 
+        />
+      );
+    })}
+  </div>
+)}
     </div>
   );
 };
