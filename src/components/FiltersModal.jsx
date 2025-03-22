@@ -18,7 +18,7 @@ const FiltersModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
-      <div className="bg-white p-6 w-[90%] max-w-md rounded-lg shadow-lg relative animate-fadeIn">
+      <div className="bg-white p-4 w-[95%] max-w-sm md:max-w-md rounded-lg shadow-lg relative animate-fadeIn">
         {/* Title & Close Button */}
         <div className="flex justify-between items-center border-b pb-2">
           <h2 className="text-xl font-semibold">Filters</h2>
